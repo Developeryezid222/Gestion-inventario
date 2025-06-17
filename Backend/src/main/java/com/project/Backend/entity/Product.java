@@ -27,6 +27,11 @@ public class Product {
     @Column(unique = true, nullable = false)
     private String sku;
 
+    @NotBlank(message = "El nombre del producto es obligatorio")
+    @Size(max = 255, message = "El nombre del producto no debe exceder los 255 caracteres")
+    @Column(name = "name_product", nullable = false)
+    private String productName;
+
     @Size(max = 500 ,message = "La descripción no puede exceder los 500 caracteres")
     private String description;
 
@@ -34,14 +39,6 @@ public class Product {
     @DecimalMin(value = "0.0", inclusive = false, message = "El precio unitario debe ser minimo")
     @Column(name = "unit_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal unitPrice;
-
-    @ManyToOne
-    @JoinColumn(name = "id_category", nullable = false)
-    private Category category;
-
-    @ManyToOne
-    @JoinColumn(name = "id_supplier", nullable = false)
-    private Supplier supplier;
 
     @Column(name = "high_date", nullable = false, updatable = false)
     private LocalDateTime highDate = LocalDateTime.now();
@@ -52,4 +49,6 @@ public class Product {
     @Min(value = 0, message = "El Stock no debe ser minimo")
     @Column(name = "minimun_stock")
     private Integer minimunStock;
+
+
 }

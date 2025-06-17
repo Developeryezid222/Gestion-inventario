@@ -5,12 +5,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.hibernate.engine.internal.ImmutableEntityEntry;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "inventories")
+@IdClass(InventoryId.class)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,7 +24,7 @@ public class Inventory {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_staore", referencedColumnName = "id_store")
+    @JoinColumn(name = "id_store", referencedColumnName = "id_store")
     private Store store;
 
     @NotNull(message = "La cantidad es obligatoria")
